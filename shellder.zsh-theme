@@ -246,12 +246,25 @@ prompt_status() {
   [[ -n "$symbols" ]] && prompt_segment "$SHELLDER_STATUS_BG" "$SHELLDER_STATUS_FG" "$symbols"
 }
 
+# - was there an error: yes - red, no - green
+# - line number
+line_number_n_error() {
+  if [[ $RETVAL -ne 0 ]]; then
+    prompt_segment red white "%I"
+  else
+    prompt_segment green white "%I"
+  fi
+}
+
 
 #
 # Prompt
 #
 build_prompt() {
   RETVAL=$?
+  echo "
+  "
+  line_number_n_error
   prompt_status
   prompt_virtualenv
   prompt_context
