@@ -45,6 +45,8 @@ set_separator() {
 }
 set_separator
 
+line_num=0
+
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
 # rendering default background/foreground.
@@ -250,9 +252,9 @@ prompt_status() {
 # - line number
 line_number_n_error() {
   if [[ $RETVAL -ne 0 ]]; then
-    prompt_segment red white "%i"
+    prompt_segment red white "$line_num"
   else
-    prompt_segment green white "%i"
+    prompt_segment green white "$line_num"
   fi
 }
 
