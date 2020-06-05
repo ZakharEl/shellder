@@ -251,6 +251,7 @@ prompt_status() {
 # - was there an error: yes - red, no - green
 # - line number
 line_number_n_error() {
+  line_num=$((line_num+1))
   if [[ $RETVAL -ne 0 ]]; then
     prompt_segment red white "$line_num"
   else
