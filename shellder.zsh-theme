@@ -250,9 +250,9 @@ prompt_status() {
 # - line number
 line_number_n_error() {
   if [[ $RETVAL -ne 0 ]]; then
-    prompt_segment red white "%I"
+    prompt_segment red white "%i"
   else
-    prompt_segment green white "%I"
+    prompt_segment green white "%i"
   fi
 }
 
