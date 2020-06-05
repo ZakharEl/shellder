@@ -252,6 +252,8 @@ prompt_status() {
 #
 build_prompt() {
   RETVAL=$?
+  echo '
+  '
   prompt_status
   prompt_virtualenv
   prompt_context
