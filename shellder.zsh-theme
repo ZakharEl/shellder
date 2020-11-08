@@ -239,11 +239,22 @@ prompt_virtualenv() {
 prompt_status() {
   local symbols
   symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{yellow}%}$RETVAL" && SHELLDER_STATUS_BG="red" || SHELLDER_STATUS_BG="green"
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{yellow}%}$RETVAL"
   [[ $UID -eq 0 ]] && symbols+='%{%F{yellow}%}⚡'
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+='%{%F{cyan}%}⚙'
 
   [[ -n "$symbols" ]] && prompt_segment "$SHELLDER_STATUS_BG" "$SHELLDER_STATUS_FG" "$symbols"
+}
+
+# - was there an error: yes - red, no - green
+# - line number
+line_number_n_error() {
+  line_num=$((line_num+1))
+  if [[ $RETVAL -ne 0 ]]; then
+    prompt_segment red white "%i"
+  else
+    prompt_segment green white "%i"
+  fi
 }
 
 
@@ -254,6 +265,7 @@ build_prompt() {
   RETVAL=$?
   echo '
   '
+  line_number_n_error
   prompt_status
   prompt_virtualenv
   prompt_context
